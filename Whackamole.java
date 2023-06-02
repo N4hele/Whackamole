@@ -17,7 +17,7 @@ public class Whackamole extends JPanel implements MouseListener, MouseMotionList
     private int score = 0;
     private boolean poweredUp = false;
     private int powerUpCounter = 3;
-    private int life = 1;
+    private int life = 5;
 
     ArrayList<Mole> moles = new ArrayList<Mole>();
     
