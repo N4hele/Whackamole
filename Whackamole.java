@@ -86,28 +86,8 @@ public class Whackamole extends JPanel implements MouseListener, MouseMotionList
             }
         }
 
-        Font f1 = new Font ("Ariel", 1, 30);
-        Font f2 = new Font ("Ariel", 1, 25);
-        if(powerUpCounter < 1){
-            g.setColor(Color.black);
-            g.drawRoundRect(62, 430, 350, 35,20,20);
-            g.setFont(f1);
-            g.drawString("PowerUp Used", 130, 458);
-        }else if(poweredUp){
-            g.setColor(Color.red);
-            g.fillRoundRect(62, 430, 350, 35,20,20);
-            g.setColor(Color.black);
-            g.drawRoundRect(62, 430, 350, 35,20,20);
-            g.setFont(f2);
-            g.drawString("Deactivating in: " + powerUpCounter + " rounds", 90, 457);
-        }else{
-            g.setColor(Color.yellow);
-            g.fillRoundRect(62, 430, 350, 35,20,20);
-            g.setColor(Color.black);
-            g.drawRoundRect(62, 430, 350, 35,20,20);
-            g.setFont(f1);
-            g.drawString("Drag Mode Power-Up", 85, 458);
-        }
+        paintPowerUp(g);
+        
         if(paint == true){
             for (Mole m : moles) {
                 
@@ -140,6 +120,42 @@ public class Whackamole extends JPanel implements MouseListener, MouseMotionList
         }
     }
 
+    public void paintPowerUp(Graphics g){
+        Font f1 = new Font ("Ariel", 1, 30);
+        Font f2 = new Font ("Ariel", 1, 25);
+        if(powerUpCounter < 1){
+            g.setColor(Color.black);
+            g.drawRoundRect(62, 430, 350, 35,20,20);
+            g.setFont(f1);
+            g.drawString("PowerUp Used", 130, 458);
+        }else if(poweredUp){
+            g.setColor(Color.red);
+            g.fillRoundRect(62, 430, 350, 35,20,20);
+            g.setColor(Color.black);
+            g.drawRoundRect(62, 430, 350, 35,20,20);
+            g.setFont(f2);
+            g.drawString("Deactivating in: " + powerUpCounter + " rounds", 90, 457);
+        }else{
+            g.setColor(Color.yellow);
+            g.fillRoundRect(62, 430, 350, 35,20,20);
+            g.setColor(Color.black);
+            g.drawRoundRect(62, 430, 350, 35,20,20);
+            g.setFont(f1);
+            g.drawString("Drag Mode Power-Up", 85, 458);
+        }
+    }
+
+    public boolean checkClick(){
+        for (Mole m : moles) {
+            int mX = m.getX();
+            int mY = m.getY();
+            if((clickedX>mX && clickedX <(mX+40))&&(clickedY>mY && clickedY <(mY+40))){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void mouseClicked (MouseEvent event) {
         if(life>0){
             int cX = event.getX();
@@ -158,13 +174,8 @@ public class Whackamole extends JPanel implements MouseListener, MouseMotionList
         if(poweredUp && powerUpCounter > 0 && enableClick){
             clickedX = event.getX();
             clickedY = event.getY();
-            for (Mole m : moles) {
-                int mX = m.getX();
-                int mY = m.getY();
-                if((clickedX>mX && clickedX <(mX+40))&&(clickedY>mY && clickedY <(mY+40))){
-                    repaint();
-                }
-            }
+            if(checkClick())
+                repaint();
         } 
     }
   
@@ -179,13 +190,8 @@ public class Whackamole extends JPanel implements MouseListener, MouseMotionList
                 poweredUp = true;
                 repaint();
             }
-            for (Mole m : moles) {
-                int mX = m.getX();
-                int mY = m.getY();
-                if((clickedX>mX && clickedX <(mX+40))&&(clickedY>mY && clickedY <(mY+40))){
-                    repaint();
-                }
-            }
+            if(checkClick())
+                repaint();
         }
     }
     

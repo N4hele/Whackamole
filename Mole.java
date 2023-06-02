@@ -1,6 +1,5 @@
 public class Mole {
 
-    private int diameter;
     private int x;
     private int y;
     private boolean clicked;
@@ -8,7 +7,6 @@ public class Mole {
     public Mole(int x, int y){
         this.x = x;
         this.y = y;
-        diameter = 5;
     }
 
     public int getX(){
