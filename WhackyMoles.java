@@ -33,7 +33,7 @@ public class WhackyMoles extends JPanel implements MouseListener, MouseMotionLis
         life = initLife;
         powerUpCounter = powerUpDuration;
 
-        myFrame = new JFrame("Whackamole");
+        myFrame = new JFrame("WhackyMoles");
         myFrame.add(this);
         addMouseListener(this);
         addMouseMotionListener(this);
